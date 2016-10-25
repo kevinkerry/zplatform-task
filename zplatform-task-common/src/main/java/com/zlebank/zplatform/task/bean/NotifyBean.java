@@ -7,13 +7,15 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+
 /**
-  * @ClassName: NotiyBean
-  * @Description: TODO
-  * @author guojia
-  * @date 2016年10月22日 下午8:52:19
-  *
-  */
+ * Class Description
+ *
+ * @author guojia
+ * @version
+ * @date 2016年10月24日 下午5:27:54
+ * @since 
+ */
 public class NotifyBean implements Serializable{
 	
 	

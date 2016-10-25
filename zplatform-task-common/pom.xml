@@ -58,10 +58,10 @@
 			<version>4.2.0.Final</version>
 		</dependency>
 		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2</version>
-		</dependency>
+  <groupId>com.oracle.ojdbc14</groupId>
+  <artifactId>ojdbc14</artifactId>
+  <version>10.2.0</version>
+</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -103,7 +103,12 @@
     <version>1.10</version>
 </dependency>
 
-
+<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
 		<!-- ================================================= -->
 		<!-- 日志及相关依赖（用slf4j+logback代替jcl+log4j） -->
 		<!-- ================================================= -->

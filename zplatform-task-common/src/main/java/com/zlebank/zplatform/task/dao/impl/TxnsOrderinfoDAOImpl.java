@@ -26,7 +26,11 @@ public class TxnsOrderinfoDAOImpl extends HibernateBaseDAOImpl<PojoTxnsOrderinfo
 	public PojoTxnsOrderinfo getTxnsOrderinfoByTxnseqno(String txnseqno) {
 		Criteria criteria = getSession().createCriteria(PojoTxnsOrderinfo.class);
 		criteria.add(Restrictions.eq("relatetradetxn", txnseqno));
-		return (PojoTxnsOrderinfo) criteria.uniqueResult();
+		PojoTxnsOrderinfo orderinfo= (PojoTxnsOrderinfo) criteria.uniqueResult();
+		if(orderinfo != null){
+			getSession().evict(orderinfo);
+		}
+		return orderinfo;
 	}
 
 }

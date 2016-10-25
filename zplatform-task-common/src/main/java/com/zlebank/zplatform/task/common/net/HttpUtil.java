@@ -37,7 +37,7 @@ public class HttpUtil {
 		// 增加每个路由的默认最大连接到400
 		clientConnectionManager.setDefaultMaxPerRoute(400);
 		httpClient = HttpClients.createMinimal(clientConnectionManager);
-
+		//org.apache.http.config.Lookup
 	}
 
 	public ResultBean exeHttpPost(String url,List<NameValuePair> params, String encoding) throws HttpException {

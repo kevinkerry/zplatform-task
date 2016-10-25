@@ -23,7 +23,7 @@ public class NotifyBean implements Serializable{
 	private String data;
     private String sign;
     private String addit;
-    
+    private String notifyURL;
 	public String getData() {
 		return data;
 	}
@@ -43,6 +43,18 @@ public class NotifyBean implements Serializable{
 		this.addit = addit;
 	}
 	
+	/**
+	 * @return the notifyURL
+	 */
+	public String getNotifyURL() {
+		return notifyURL;
+	}
+	/**
+	 * @param notifyURL the notifyURL to set
+	 */
+	public void setNotifyURL(String notifyURL) {
+		this.notifyURL = notifyURL;
+	}
 	public List<NameValuePair> getNotifyParam() {
 		BasicNameValuePair[] pairs = new BasicNameValuePair[] {
 				new BasicNameValuePair("data", data),

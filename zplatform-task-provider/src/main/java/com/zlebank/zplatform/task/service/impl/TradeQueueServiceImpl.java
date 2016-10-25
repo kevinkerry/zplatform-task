@@ -159,8 +159,8 @@ public class TradeQueueServiceImpl implements TradeQueueService{
 		// TODO Auto-generated method stub
 		PojoTxnsNotifyTask asyncNotifyTask = txnsNotifyTaskDAO.getAsyncNotifyTask(notifyTaskBean.getTxnseqno());
 		if(asyncNotifyTask==null){
-			PojoTxnsNotifyTask txnsNotifyTask = BeanCopyUtil.copyBean(PojoTxnsNotifyTask.class, notifyTaskBean);
-			txnsNotifyTaskDAO.saveTask(txnsNotifyTask);
+			asyncNotifyTask = BeanCopyUtil.copyBean(PojoTxnsNotifyTask.class, notifyTaskBean);
+			txnsNotifyTaskDAO.saveTask(asyncNotifyTask);
 		}else {
 			asyncNotifyTask.setTxnseqno(notifyTaskBean.getTxnseqno());
 			asyncNotifyTask.setMemberId(notifyTaskBean.getMemberId());
@@ -170,12 +170,15 @@ public class TradeQueueServiceImpl implements TradeQueueService{
 		}
 		if("01".equals(notifyTaskBean.getSendStatus())){
 			int[] timeSpace = new int[] { 0, 60000 * 1, 60000 * 2, 60000 * 2,60000 * 30, 60000 * 30,60000 * 30,60000 * 30};
-			Long sendTime = System.currentTimeMillis() + timeSpace[1];
-			NotifyQueueBean notifyQueueBean = new NotifyQueueBean();
-			notifyQueueBean.setTxnseqno(notifyTaskBean.getTxnseqno());
-			notifyQueueBean.setSendTimes(asyncNotifyTask.getSendTimes());
-			notifyQueueBean.setSendDateTime(DateUtil.formatDateTime(DateUtil.DEFAULT_DATE_FROMAT, new Date(sendTime)));
-			addNotifyQueue(notifyQueueBean);
+			if(asyncNotifyTask.getSendTimes()<asyncNotifyTask.getMaxSendTimes()){
+				Long sendTime = System.currentTimeMillis() + timeSpace[asyncNotifyTask.getSendTimes()];
+				NotifyQueueBean notifyQueueBean = new NotifyQueueBean();
+				notifyQueueBean.setTxnseqno(notifyTaskBean.getTxnseqno());
+				notifyQueueBean.setSendTimes(asyncNotifyTask.getSendTimes()+1);
+				notifyQueueBean.setSendDateTime(DateUtil.formatDateTime(DateUtil.DEFAULT_DATE_FROMAT, new Date(sendTime)));
+				addNotifyQueue(notifyQueueBean);
+			}
+			
 		}
 	}
 	

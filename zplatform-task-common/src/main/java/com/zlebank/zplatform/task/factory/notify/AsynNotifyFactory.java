@@ -50,6 +50,7 @@ public class AsynNotifyFactory implements BeanFactory{
 			PojoTxnsOrderinfo orderinfo = txnsOrderinfoDAO.getTxnsOrderinfoByTxnseqno(txnseqno);
 			TradeNotifyBean tradeNotifyBean = new TradeNotifyBean(orderinfo);
 			responseData(tradeNotifyBean, orderinfo.getFirmemberno(), orderinfo.getSecmemberno(), bean);
+			bean.setNotifyURL(orderinfo.getBackurl());
 		}else if(biztypeEnum == BiztypeEnum.NM000205){
 			
 			
@@ -68,6 +69,7 @@ public class AsynNotifyFactory implements BeanFactory{
 				bean = new NotifyBean();
 				TradeNotifyBean tradeNotifyBean = new TradeNotifyBean(insteadPayRealtime);
 				responseData(tradeNotifyBean, insteadPayRealtime.getCoopInstCode(), insteadPayRealtime.getMerId(), bean);
+				bean.setNotifyURL(insteadPayRealtime.getBackUrl());
 			}
 		}else if(businessEnum == BusinessEnum.INSTEADPAY_BATCH){
 			

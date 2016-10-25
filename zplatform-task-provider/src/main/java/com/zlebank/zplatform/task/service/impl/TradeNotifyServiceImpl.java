@@ -22,6 +22,8 @@ import com.zlebank.zplatform.task.pojo.PojoTxnsNotifyTask;
 import com.zlebank.zplatform.task.pojo.PojoTxnsOrderinfo;
 import com.zlebank.zplatform.task.service.TradeNotifyService;
 import com.zlebank.zplatform.task.service.TradeQueueService;
+import com.zlebank.zplatform.task.thread.AsynHttpRequestThread;
+import com.zlebank.zplatform.task.thread.AsyncNotifyThreadPool;
 @Service("tradeNotifyService")
 public class TradeNotifyServiceImpl implements TradeNotifyService {
 
@@ -42,15 +44,21 @@ public class TradeNotifyServiceImpl implements TradeNotifyService {
 		NotifyBean bean = null;
 		try {
 			PojoTxnsLog txnsLog = txnsLogDAO.getTxnsLogByTxnseqno(txnseqno);
-			PojoTxnsOrderinfo orderinfo = txnsOrderinfoDAO.getTxnsOrderinfoByTxnseqno(txnseqno);
-			BiztypeEnum biztypeEnum = BiztypeEnum.fromValue(orderinfo.getBiztype());
 			BusiTypeEnum busiTypeEnum = BusiTypeEnum.fromValue(txnsLog.getBusitype());
 			if(busiTypeEnum == BusiTypeEnum.CONSUMPTION){//消费
+				PojoTxnsOrderinfo orderinfo = txnsOrderinfoDAO.getTxnsOrderinfoByTxnseqno(txnseqno);
+				BiztypeEnum biztypeEnum = BiztypeEnum.fromValue(orderinfo.getBiztype());
 				bean = beanFactory.getBean(txnseqno,biztypeEnum);
 			}else if(busiTypeEnum == BusiTypeEnum.CHARGE){//充值
+				PojoTxnsOrderinfo orderinfo = txnsOrderinfoDAO.getTxnsOrderinfoByTxnseqno(txnseqno);
+				BiztypeEnum biztypeEnum = BiztypeEnum.fromValue(orderinfo.getBiztype());
 				bean = beanFactory.getBean(txnseqno,biztypeEnum);
 			}else if(busiTypeEnum == BusiTypeEnum.INSTEADPAY){//代付
 				bean = beanFactory.getInsteadPayBean(txnseqno, BusinessEnum.fromValue(txnsLog.getBusicode()));
+			}
+			if(bean!=null){
+				AsynHttpRequestThread notifyThread = new AsynHttpRequestThread(txnsLog.getAccsecmerno(), txnseqno,bean);
+				AsyncNotifyThreadPool.getInstance().executeMission(notifyThread);
 			}
 			
 		} catch (Exception e) {

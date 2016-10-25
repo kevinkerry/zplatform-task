@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<dubbo:service interface="com.zlebank.zplatform.task.service.TradeNotifyService" ref="tradeNotifyService" retries="0" version="1.0" async="true" timeout="30000">
+		<dubbo:method name="notify" async="true" return="false" retries="0" retry="0" timeout="30000"></dubbo:method>
+	</dubbo:service>
+	
+</beans>

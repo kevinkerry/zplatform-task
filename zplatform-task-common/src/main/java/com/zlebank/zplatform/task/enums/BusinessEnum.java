@@ -48,7 +48,7 @@ public enum BusinessEnum {
     
     public static BusinessEnum fromValue(String value) {
         for(BusinessEnum busi:values()){
-            if(busi.busiCode==value){
+            if(busi.busiCode.equals(value)){
                 return busi;
             }
         }

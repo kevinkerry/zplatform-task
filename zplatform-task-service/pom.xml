@@ -11,7 +11,7 @@
 	<packaging>war</packaging>
 	<name>zplatform-task-service</name>
 	<url>http://maven.apache.org</url>
-	<description>证联支付平台-个人会员服务</description>
+	<description>证联支付平台-任务服务</description>
 
 
 

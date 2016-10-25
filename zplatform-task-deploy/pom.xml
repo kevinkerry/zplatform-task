@@ -298,6 +298,9 @@
 		</plugins>
 	</build>
 	<modules>
-		
+		<module>../zplatform-task-api</module>
+		<module>../zplatform-task-common</module>
+		<module>../zplatform-task-provider</module>
+		<module>../zplatform-task-service</module>
 	</modules>
 </project>

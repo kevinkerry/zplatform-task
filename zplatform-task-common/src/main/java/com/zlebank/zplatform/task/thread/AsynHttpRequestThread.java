@@ -67,7 +67,14 @@ public class AsynHttpRequestThread implements Runnable {
 		this.params = bean.getNotifyParam();
 		
 	}
-
+	public AsynHttpRequestThread(String memberId, String txnseqno,NotifyBean bean ) {
+		super();
+		this.memberId = memberId;
+		this.txnseqno = txnseqno;
+		this.sendUrl = bean.getNotifyURL();
+		this.params = bean.getNotifyParam();
+		
+	}
 	@Override
 	public void run() {
 		try {

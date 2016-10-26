@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>zplatform-task-api</artifactId>
 	<packaging>jar</packaging>
-	<name>zplatform-task-common</name>
+	<name>zplatform-task-api</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

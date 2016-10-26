@@ -763,6 +763,9 @@ public class DateUtil {
 	public static String getSettleDate(int cycle){
         return formatDateTime(SIMPLE_DATE_FROMAT, skipDateTime(new Date(),cycle));
 	}
+	public static String getBeforeDate(int skipday){
+        return formatDateTime(SIMPLE_DATE_FROMAT, skipDateTime(new Date(),skipday));
+    }
 
 	public static void main(String[] args) {
 	    

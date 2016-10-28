@@ -36,7 +36,6 @@ import com.google.common.base.Charsets;
 import com.zlebank.zplatform.cmbc.producer.InsteadPayProducer;
 import com.zlebank.zplatform.cmbc.producer.enums.InsteadPayTagsEnum;
 import com.zlebank.zplatform.cmbc.producer.interfaces.Producer;
-import com.zlebank.zplatform.task.bean.ReexchangeBean;
 import com.zlebank.zplatform.task.bean.SingleReexchangeBean;
 import com.zlebank.zplatform.task.common.utils.Constant;
 import com.zlebank.zplatform.task.common.utils.DateUtil;
@@ -54,7 +53,7 @@ import com.zlebank.zplatform.task.service.cmb.ReexchangeTaskService;
  * @date 2016年10月25日 下午2:44:47
  * @since 
  */
-@Service
+@Service("reexchangeTaskService")
 public class ReexchangeTaskServiceImpl implements ReexchangeTaskService{
 	 private static final Log log = LogFactory.getLog(ReexchangeTaskServiceImpl.class);
 	    private final static String FTPIP = Constant.getInstance().getCmbc_single_insteadpay_ftp_ip();

@@ -121,11 +121,5 @@ public class TradeQueueBean implements Serializable{
 	public void setBusiType(String busiType) {
 		this.busiType = busiType;
 	}
-	public static void main(String[] args) {
-		TradeQueueBean tradeQueueBean = new TradeQueueBean();
-		tradeQueueBean.setPayInsti("123455");
-		String jsonString = JSON.toJSONString(tradeQueueBean);
-		System.out.println(jsonString);
-		
-	}
+	
 }

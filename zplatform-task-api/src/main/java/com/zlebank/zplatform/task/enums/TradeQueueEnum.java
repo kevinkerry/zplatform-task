@@ -20,10 +20,10 @@ package com.zlebank.zplatform.task.enums;
  */
 public enum TradeQueueEnum {
 
-	TRADEQUEUE("TradeQueue"),
-	TIMEOUTQUEUE("TimeOutQueue"),
-	NOTIFYQUEUE("notifyQueue"),
-	REFUNDQUEUE("refundQueue"),
+	TRADEQUEUE("TRADEQUEUES"),
+	TIMEOUTQUEUE("TIMEOUTQUEUES"),
+	NOTIFYQUEUE("NOTIFYQUEUES"),
+	REFUNDQUEUE("REFUNDQUEUES"),
 	UNKNOW("");
 	
 	private String name;

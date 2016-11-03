@@ -71,25 +71,6 @@
 		<property name="repeatInterval" value="60000" />
     </bean>
     
-    <!-- 退汇定时任务 -->
-    <bean id="reexchangeJob" class="com.zlebank.zplatform.task.job.ReexchangeJob" />
-    <bean id="reexchangeDetail"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="reexchangeJob" />
-		<property name="targetMethod" value="reexchange" />
-		<!-- 对于相同的JobDetail，当指定多个Trigger时, 很可能第一个job完成之前，第二个job就开始了。指定concurrent设为false，多个job不会并发运行，第二个job将会被推迟。 -->
-		<property name="concurrent" value="false" />
-	</bean>
-	<bean id="reexchangeJobTrigger"
-	 class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-		<property name="jobDetail" ref="reexchangeDetail" />
-		<!-- 启动延迟60秒 -->
-		<property name="startDelay" value="1000" />  
-		<!-- 60分钟执行一次任务 -->
-		<property name="repeatInterval" value="3600000" />
-    </bean>
-    
-    
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="${redis.maxIdle}" />
         <property name="maxTotal" value="${redis.maxActive}" />

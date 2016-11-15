@@ -41,4 +41,52 @@
 		<property name="concurrent" value="false"/>
 	</bean>
 
+	<!-- 生成批量代付对账文件任务 -->
+	<bean id="createMerchantInsteadSDFileTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="createMerchantInsteadSDFileDetail"/>
+		<property name="startDelay" value="0"/>
+		<property name="repeatInterval" value="40000"/>
+	</bean>
+	<bean id="createMerchantInsteadSDFileDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createMerchantInsteadSDFileJob"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<!-- 生成单笔代付对账文件任务 -->
+	<bean id="createMerchantInsteadSDFileTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createMerchantInsteadSDFileDetail2"/>
+		<property name="startDelay" value="0"/>
+		<property name="cronExpression" value="0 4 2 * * ?"/>
+	</bean>
+	<bean id="createMerchantInsteadSDFileDetail2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createMerchantInsteadSDFileJob"/>
+		<property name="targetMethod" value="execute1"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<!-- 生成单笔实时代付退汇文件 -->
+	<bean id="createMerchantInsteadSDFileTrigger3" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createMerchantInsteadSDFileDetail3"/>
+		<property name="startDelay" value="0"/>
+		<property name="cronExpression" value="0 59 23 * * ?"/>
+	</bean>
+	<bean id="createMerchantInsteadSDFileDetail3" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createMerchantInsteadSDFileJob"/>
+		<property name="targetMethod" value="execute2"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<!-- 生成批量代付退汇文件 -->
+	<bean id="createMerchantInsteadSDFileTrigger4" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createMerchantInsteadSDFileDetail4"/>
+		<property name="startDelay" value="0"/>
+		<property name="cronExpression" value="0 58 23 * * ?"/>
+	</bean>
+	<bean id="createMerchantInsteadSDFileDetail4" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createMerchantInsteadSDFileJob"/>
+		<property name="targetMethod" value="execute3"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
 </beans>

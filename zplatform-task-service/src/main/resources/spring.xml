@@ -86,6 +86,10 @@
 				<ref bean="createMemberFileTrigger" />
 				<ref bean="createBondSDFileTrigger" />
 				<ref bean="createTransferAccountFileTrigger" />
+				<ref bean="createMerchantInsteadSDFileTrigger" />
+				<ref bean="createMerchantInsteadSDFileTrigger2" />
+				<ref bean="createMerchantInsteadSDFileTrigger3" />
+				<ref bean="createMerchantInsteadSDFileTrigger4" />
 				<!-- reconcile end -->
 			</list>
 		</property>

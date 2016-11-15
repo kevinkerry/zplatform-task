@@ -30,4 +30,28 @@ public interface TxnsLogReconService {
 
 	public List<?> getTransferAccountByDate(String memberId, String date);
 
+	public List<?> getInsteadMemberByDate(String date);
+
+	public List<?> getSumInstead(String memberId, String date);
+
+	public List<?> getInsteadMerchantDetailedByDate(String memberId, String date);
+
+	public List<?> getSinglepaymentMemberByDate(String dateTime);
+
+	public List<?> getSumSinglepayment(String memberId, String dateTime);
+
+	public List<?> getSinglepaymentDetailByDate(String memberId, String dateTime);
+
+	public List<?> getSingleInsteadMemberByDate(String dateTime);
+
+	public List<?> getSumSingleInstead(String memberId, String dateTime);
+
+	public List<?> getSingleInsteadDetailedByDate(String memberId, String dateTime);
+
+	public List<?> getBatchpaymentMemberByDate(String dateTime);
+
+	public List<?> getSumBatchpayment(String memberId, String dateTime);
+
+	public List<?> getBatchpaymentDetailedByDate(String memberId, String dateTime);
+
 }

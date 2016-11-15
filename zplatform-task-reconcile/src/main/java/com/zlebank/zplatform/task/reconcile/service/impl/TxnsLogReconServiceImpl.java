@@ -121,4 +121,97 @@ public class TxnsLogReconServiceImpl implements TxnsLogReconService {
 		return dao.query(sql, new Object[] { memberId, date });
 	}
 
+	@Override
+	public List<?> getInsteadMemberByDate(String date) {
+		String sql = "select distinct t.ACCSECMERNO, t.ACCSETTLEDATE from t_txns_log t where t.ACCSETTLEDATE=? and t.ACCSECMERNO is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='70000001'";
+		return dao.query(sql, new Object[] { date });
+	}
+
+	@Override
+	public List<?> getSumInstead(String memberId, String date) {
+		String sql = "select count(*) total,"
+                + " sum (t.amount) totalAmount," + " sum(t.txnfee) totalfee"
+                + " from t_txns_log t" + " where" + " t.ACCSECMERNO = ?"
+                + " and t.ACCSETTLEDATE = ?" + " and t.busicode in (70000001)"
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, date });
+	}
+
+	@Override
+	public List<?> getInsteadMerchantDetailedByDate(String memberId, String date) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,t.TXNFEE,t.PAYORDCOMTIME from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno where (b.status=9 or b.status is null) and t.accsecmerno=? and t.ACCSETTLEDATE=? and t.payordno is not null and SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode in ('70000001')";
+		return dao.query(sql, new Object[] { memberId, date });
+	}
+
+	@Override
+	public List<?> getSinglepaymentMemberByDate(String dateTime) {
+		String sql = "select distinct t.ACCSECMERNO, t.ACCSETTLEDATE from t_txns_log t where t.ACCSETTLEDATE=? and t.ACCSECMERNO is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='70000002'";// 单笔代付
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumSinglepayment(String memberId, String dateTime) {
+		String sql = "select count(*) total,"
+                + " sum (t.amount) totalAmount," + " sum(t.txnfee) totalfee"
+                + " from t_txns_log t" + " where" + " t.ACCSECMERNO = ?"
+                + " and t.ACCSETTLEDATE = ?" + " and t.busicode = '70000002' "
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getSinglepaymentDetailByDate(String memberId, String dateTime) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,t.TXNFEE,t.PAYORDCOMTIME "
+				+ " from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno where (b.status=9 or b.status is null) and "
+				+ " t.accsecmerno=? and t.ACCSETTLEDATE=? and t.payordno is not null and SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode in ('70000002')";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getSingleInsteadMemberByDate(String dateTime) {
+		String sql = "select distinct t.TRAN_DATE,tr.MER_ID from t_txns_cmbc_inst_pay_log t,T_INSTEAD_PAY_REALTIME tr "
+				+ " where tr.TXNSEQNO = t.TXNSEQNO  and tr.STATUS='05' and t.TRAN_DATE=?  ";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumSingleInstead(String memberId, String dateTime) {
+		String sql = "select count(*) total,sum(t.TRANS_AMT) totalAmount from T_TXNS_CMBC_INST_PAY_LOG  t,T_INSTEAD_PAY_REALTIME tr"
+				+ " where t.TXNSEQNO = tr.TXNSEQNO and tr.STATUS='05' and tr.MER_ID=? and t.TRAN_DATE=? ";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getSingleInsteadDetailedByDate(String memberId, String dateTime) {
+		String sql = "select  tr.ORDERNO,tr.TXNSEQNO,tr.ORDER_COMMI_TIME,tr.TRANS_AMT,t.RESP_CODE ,t.BANK_TRAN_ID ,t.TRAN_DATE,t.RESP_CODE,t.RESP_MSGt,t.return_date "
+				+ " from T_TXNS_CMBC_INST_PAY_LOG t,T_INSTEAD_PAY_REALTIME tr"
+				+ " where t.TXNSEQNO = tr.TXNSEQNO and tr.STATUS='05' and tr.MER_ID=? and t.TRAN_DATE=? ";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getBatchpaymentMemberByDate(String dateTime) {
+		String sql = "select distinct t.ACCSECMERNO, t.ACCSETTLEDATE from t_txns_log t where t.ACCSETTLEDATE=? and t.ACCSECMERNO is not null and SUBSTR (trim(t.retcode),-2) <> '00' and t.busicode='70000001'";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumBatchpayment(String memberId, String dateTime) {
+		String sql = "select count(*) total,"
+                + " sum (t.amount) totalAmount," + " sum(t.txnfee) totalfee"
+                + " from t_txns_log t" + " where" + " t.ACCSECMERNO = ?"
+                + " and t.ACCSETTLEDATE = ?" + " and t.busicode = '70000001' "
+                + " and SUBSTR(trim(t.retcode), -2) <> '00' ";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getBatchpaymentDetailedByDate(String memberId, String dateTime) {
+		String sql = "select t1.mer_id, t1.order_id,t.TXNSEQNO,t.txn_time, t1.amt,t1.resp_code, t1.resp_msg , t2.payordno, t2.payordfintime,t1.return_date from t_instead_pay_detail t1 "
+                + " join t_instead_pay_batch t  on t.id=t1.batch_id "
+                + " left join t_txns_log t2 on t2.txnseqno=t1.txnseqno "
+                + " where t1.resp_code='04' and t1.mer_id =? and t.txn_time =?";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
 }

@@ -29,4 +29,16 @@
 		<property name="concurrent" value="false"/>
 	</bean>
 
+	<!-- 生成转账业务对账文件任务 -->
+	<bean id="createTransferAccountFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createTransferAccountFileDetail"/>
+		<property name="startDelay" value="0"/>
+		<property name="cronExpression" value="0 3 2 * * ?"/>
+	</bean>
+	<bean id="createTransferAccountFileDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createTransferAccountFileJob"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
 </beans>

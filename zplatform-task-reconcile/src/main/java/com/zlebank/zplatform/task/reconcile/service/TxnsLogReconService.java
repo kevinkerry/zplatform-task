@@ -24,4 +24,10 @@ public interface TxnsLogReconService {
 
 	public List<?> getBondByDate(String memberId, String date);
 
+	public List<?> geTransferAccountMemberByDate(String date);
+
+	public List<?> getSumTransferAccount(String memberId, String date);
+
+	public List<?> getTransferAccountByDate(String memberId, String date);
+
 }

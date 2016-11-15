@@ -214,4 +214,125 @@ public class TxnsLogReconServiceImpl implements TxnsLogReconService {
 		return dao.query(sql, new Object[] { memberId, dateTime });
 	}
 
+	@Override
+	public List<?> getIndustryRechargeByDate(String dateTime) {
+		String sql = "select distinct t.ACCMEMBERID, t.ACCSETTLEDATE from t_txns_log t where t.ACCSETTLEDATE=? and t.ACCMEMBERID is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='20000005'";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumIndustryRecharge(String memberId, String dateTime) {
+		String sql = "select count(*) total,sum (t.amount) totalAmount,sum(t.txnfee) totalFee "
+                + "from t_txns_log t  "
+                + "where  t.ACCMEMBERID = ? and t.ACCSETTLEDATE=? and t.busicode = '20000005'"
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getIndustryRechargeDetailByDate(String memberId, String dateTime) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,t.TXNFEE,"
+                + "t.PAYORDCOMTIME from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno  "
+                + "where (b.status=9 or b.status is null) and t.ACCMEMBERID=? and t.ACCSETTLEDATE=? and t.payordno is not null "
+                + "and SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode in ('20000005')";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getIndustryConsumeByDate(String dateTime) {
+		String sql = "select distinct t.ACCMEMBERID, t.ACCSETTLEDATE from t_txns_log t where t.ACCSETTLEDATE=? and t.ACCMEMBERID is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='10000005'";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumIndustryConsume(String memberId, String dateTime) {
+		String sql = "select count(*) total,sum (t.amount) totalAmount,sum(t.txnfee) totalFee "
+                + "from t_txns_log t  "
+                + "where  t.ACCMEMBERID = ? and t.ACCSETTLEDATE=? and t.busicode = '10000005'"
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getIndustryConsumeDetailByDate(String memberId, String dateTime) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,"
+                + "t.TXNFEE,t.PAYORDCOMTIME from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno "
+                + "where (b.status=9 or b.status is null) and t.ACCMEMBERID=? and t.ACCSETTLEDATE=? and "
+                + " SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode ='10000005' ";
+		return null;
+	}
+
+	@Override
+	public List<?> getIndustryDrawByDate(String dateTime) {
+		String sql = "select distinct t.ACCMEMBERID, t.ACCSETTLEDATE from t_txns_log t where t.ACCSETTLEDATE=? and t.ACCMEMBERID is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='50000004'";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumIndustryDraw(String memberId, String dateTime) {
+		String sql = "select count(*) total,sum (t.amount) totalAmount,sum(t.txnfee) totalFee "
+                + "from t_txns_log t  "
+                + "where  t.ACCMEMBERID = ? and t.ACCSETTLEDATE=? and t.busicode = '50000004'"
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getIndustryDrawDetailByDate(String memberId, String dateTime) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,"
+				+ "t.TXNFEE,t.PAYORDCOMTIME from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno "
+				+ "where (b.status=9 or b.status is null) and t.ACCMEMBERID=? and t.ACCSETTLEDATE=? and "
+				+ " SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode ='50000004' ";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getIndustryTransferByDate(String dateTime) {
+		String sql = "select distinct t.ACCMEMBERID, t.ACCSETTLEDATE from t_txns_log t where t.ACCSETTLEDATE=? and t.ACCMEMBERID is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='50000003'";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumIndustryTransfer(String memberId, String dateTime) {
+		String sql = "select count(*) total,sum (t.amount) totalAmount,sum(t.txnfee) totalFee "
+                + "from t_txns_log t  "
+                + "where  t.ACCMEMBERID = ? and t.ACCSETTLEDATE=? and t.busicode = '50000003'"
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getIndustryTransferDetailByDate(String memberId, String dateTime) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,"
+				+ "t.TXNFEE,t.PAYORDCOMTIME from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno "
+				+ "where (b.status=9 or b.status is null) and t.ACCMEMBERID=? and t.ACCSETTLEDATE=? and "
+				+ " SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode ='50000003' ";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getIndustryRefundByDate(String dateTime) {
+		String sql = "select distinct t.ACCMEMBERID, t.ACCSETTLEDATE from t_txns_log t "
+				+ "where t.ACCSETTLEDATE=? and t.ACCMEMBERID is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='40000003'";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumIndustryRefund(String memberId, String dateTime) {
+		String sql = "select count(*) total,sum (t.amount) totalAmount,sum(t.txnfee) totalFee "
+                + "from t_txns_log t  "
+                + "where  t.ACCMEMBERID = ? and t.ACCSETTLEDATE=? and t.busicode = '40000003'"
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getIndustryRefundDetailByDate(String memberId, String dateTime) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,"
+				+ "t.TXNFEE,t.PAYORDCOMTIME,t.TXNSEQNO_OG from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno "
+				+ "where (b.status=9 or b.status is null) and t.ACCMEMBERID=? and t.ACCSETTLEDATE=? and "
+				+ " SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode ='40000003' ";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
 }

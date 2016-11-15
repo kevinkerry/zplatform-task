@@ -54,4 +54,34 @@ public interface TxnsLogReconService {
 
 	public List<?> getBatchpaymentDetailedByDate(String memberId, String dateTime);
 
+	public List<?> getIndustryRechargeByDate(String dateTime);
+
+	public List<?> getSumIndustryRecharge(String memberId, String dateTime);
+
+	public List<?> getIndustryRechargeDetailByDate(String memberId, String dateTime);
+
+	public List<?> getIndustryConsumeByDate(String dateTime);
+
+	public List<?> getSumIndustryConsume(String memberId, String dateTime);
+
+	public List<?> getIndustryConsumeDetailByDate(String memberId, String dateTime);
+
+	public List<?> getIndustryDrawByDate(String dateTime);
+
+	public List<?> getSumIndustryDraw(String memberId, String dateTime);
+
+	public List<?> getIndustryDrawDetailByDate(String memberId, String dateTime);
+
+	public List<?> getIndustryTransferByDate(String dateTime);
+
+	public List<?> getSumIndustryTransfer(String memberId, String dateTime);
+
+	public List<?> getIndustryTransferDetailByDate(String memberId, String dateTime);
+
+	public List<?> getIndustryRefundByDate(String dateTime);
+
+	public List<?> getSumIndustryRefund(String memberId, String dateTime);
+
+	public List<?> getIndustryRefundDetailByDate(String memberId, String dateTime);
+
 }

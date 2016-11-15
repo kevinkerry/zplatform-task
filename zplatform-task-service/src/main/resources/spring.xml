@@ -90,6 +90,11 @@
 				<ref bean="createMerchantInsteadSDFileTrigger2" />
 				<ref bean="createMerchantInsteadSDFileTrigger3" />
 				<ref bean="createMerchantInsteadSDFileTrigger4" />
+				<ref bean="createIndustryAccountsFileTrigger" />
+				<ref bean="createIndustryAccountsFileTrigger2" />
+				<ref bean="createIndustryAccountsFileTrigger3" />
+				<ref bean="createIndustryAccountsFileTrigger4" />
+				<ref bean="createIndustryAccountsFileTrigger5" />
 				<!-- reconcile end -->
 			</list>
 		</property>

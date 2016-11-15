@@ -89,4 +89,64 @@
 		<property name="concurrent" value="false"/>
 	</bean>
 
+	<!-- 生成行业专户充值对账文件 -->
+	<bean id="createIndustryAccountsFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createIndustryAccountsFileDetail" />
+		<property name="startDelay" value="0" />
+		<property name="cronExpression" value="0 0 1 * * ?" />
+	</bean>
+	<bean id="createIndustryAccountsFileDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createIndustryAccountsFileJob"/>
+		<property name="targetMethod" value="queryIndustryAccountRecharge"/>		
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<!-- 生成行业专户消费对账文件 -->
+	<bean id="createIndustryAccountsFileTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createIndustryAccountsFileDetail2" />
+		<property name="startDelay" value="0" />
+		<property name="cronExpression" value="0 1 1 * * ?" />
+	</bean>
+	<bean id="createIndustryAccountsFileDetail2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createIndustryAccountsFileJob"/>
+		<property name="targetMethod" value="queryIndustryAccountConsume"/>		
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<!-- 生成行业专户提取对账文件 -->
+	<bean id="createIndustryAccountsFileTrigger3" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createIndustryAccountsFileDetail3" />
+		<property name="startDelay" value="0" />
+		<property name="cronExpression" value="0 2 1 * * ?" />
+	</bean>
+	<bean id="createIndustryAccountsFileDetail3" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createIndustryAccountsFileJob"/>
+		<property name="targetMethod" value="queryIndustryAccountDraw"/>		
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<!-- 生成行业专户转账对账文件  -->
+	<bean id="createIndustryAccountsFileTrigger4" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createIndustryAccountsFileDetail4" />
+		<property name="startDelay" value="0" />
+		<property name="cronExpression" value="0 3 1 * * ?" />
+	</bean>
+	<bean id="createIndustryAccountsFileDetail4" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createIndustryAccountsFileJob"/>
+		<property name="targetMethod" value="queryIndustryAccountTransfer"/>		
+		<property name="concurrent" value="false" />
+	</bean>
+	
+	<!-- 生成行业专户退款对账文件 -->
+	<bean id="createIndustryAccountsFileTrigger5" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createIndustryAccountsFileDetail5" />
+		<property name="startDelay" value="0" />
+		<property name="cronExpression" value="0 4 1 * * ?" />
+	</bean>
+	<bean id="createIndustryAccountsFileDetail5" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createIndustryAccountsFileJob"/>
+		<property name="targetMethod" value="queryIndustryAccountRefund"/>		
+		<property name="concurrent" value="false" />
+	</bean>
+
 </beans>

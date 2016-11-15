@@ -17,4 +17,16 @@
 		<property name="concurrent" value="false"/>
 	</bean>
 
+	<!-- 生成保证金账户对账文件任务 -->
+	<bean id="createBondSDFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createBondSDFileDetail"/>
+		<property name="startDelay" value="0"/>
+		<property name="cronExpression" value="0 2 2 * * ?"/>
+	</bean>
+	<bean id="createBondSDFileDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createBondSDFileJob"/>
+		<property name="targetMethod" value="execute"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
 </beans>

@@ -84,6 +84,7 @@
 				<ref bean="tradeNotifyJobTrigger"/>
 				<!-- reconcile start -->
 				<ref bean="createMemberFileTrigger" />
+				<ref bean="createBondSDFileTrigger" />
 				<!-- reconcile end -->
 			</list>
 		</property>

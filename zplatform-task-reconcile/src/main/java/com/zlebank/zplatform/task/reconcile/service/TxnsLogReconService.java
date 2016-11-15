@@ -18,4 +18,10 @@ public interface TxnsLogReconService {
 
 	public List<?> getFtpConfigByNameAndModule(String serverName, String module);
 
+	public List<?> getBondMemberByDate(String date);
+
+	public List<?> getSumBond(String memberId, String date);
+
+	public List<?> getBondByDate(String memberId, String date);
+
 }

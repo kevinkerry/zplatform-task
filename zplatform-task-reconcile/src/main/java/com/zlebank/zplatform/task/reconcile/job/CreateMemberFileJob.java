@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.zlebank.zplatform.task.reconcile.service.TxnsLogReconService;
-import com.zlebank.zplatform.task.reconcile.util.TimeUtil;
 import com.zlebank.zplatform.task.reconcile.util.net.FTPClientFactory;
 import com.zlebank.zplatform.task.reconcile.util.net.ftp.AbstractFTPClient;
 
@@ -42,8 +41,7 @@ public class CreateMemberFileJob {
 
 	public void execute() throws Exception {
 		// 取出网络时间
-		long time = TimeUtil.syncCurrentTime();
-		Date date = new Date(time);
+		Date date = new Date(System.currentTimeMillis());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String dateTime = sdf.format(date);

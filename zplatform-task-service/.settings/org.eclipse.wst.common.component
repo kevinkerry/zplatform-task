@@ -13,7 +13,10 @@
         <dependent-module archiveName="zplatform-task-api-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zplatform-task-api/zplatform-task-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <property name="java-output-path" value="/zplatform-task-service/target/classes"/>
+        <dependent-module archiveName="zplatform-task-reconcile-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zplatform-task-reconcile/zplatform-task-reconcile">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="zplatform-task-service"/>
+        <property name="java-output-path" value="/zplatform-task-service/target/classes"/>
     </wb-module>
 </project-modules>

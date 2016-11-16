@@ -146,7 +146,7 @@ public class ReexchangeTaskServiceImpl implements ReexchangeTaskService{
 				for(SingleReexchangeBean bean : resultList){
 					PojoCmbcResfileLog cmbcResfileLog = new PojoCmbcResfileLog(bean);
 					cmbcResfileLogDAO.saveResfileLog(cmbcResfileLog);
-					producer.sendJsonMessage(JSON.toJSONString(bean));
+					producer.sendJsonMessage(JSON.toJSONString(bean),InsteadPayTagsEnum.QUERY_INSTEADPAY_REALTIME);
 				}
 				producer.closeProducer();
 			} catch (MQClientException e) {

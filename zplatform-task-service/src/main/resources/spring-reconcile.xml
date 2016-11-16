@@ -149,4 +149,40 @@
 		<property name="concurrent" value="false" />
 	</bean>
 
+	<!-- 生成授信账户充值对账文件 -->
+	<bean id="createCreditAccountFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createCreditAccountFileDetail" />
+		<property name="startDelay" value="0" />
+		 <property name="cronExpression" value="0 5 1 * * ?" /> 
+	</bean>
+	<bean id="createCreditAccountFileDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createCreditAccountFileJob"/>
+		<property name="targetMethod" value="queryCreditRecharge"/>		
+		<property name="concurrent" value="false" />
+	</bean>
+	
+	<!--  生成授信账户消费对账文件 -->
+	<bean id="createCreditAccountFileTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createCreditAccountFileDetail2" />
+		<property name="startDelay" value="0" />
+	    <property name="cronExpression" value="0 6 1 * * ?" /> 
+	</bean>
+	<bean id="createCreditAccountFileDetail2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createCreditAccountFileJob"/>
+		<property name="targetMethod" value="queryCreditConsume"/>		
+		<property name="concurrent" value="false" />
+	</bean>
+	
+	<!-- 生成授信账户退款对账文件 -->
+	<bean id="createCreditAccountFileTrigger3" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="createCreditAccountFileDetail3" />
+		<property name="startDelay" value="0" />
+		 <property name="cronExpression" value="0 7 1 * * ?" /> 
+	</bean>
+	<bean id="createCreditAccountFileDetail3" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="createCreditAccountFileJob"/>
+		<property name="targetMethod" value="queryCreditRefund"/>		
+		<property name="concurrent" value="false" />
+	</bean>
+
 </beans>

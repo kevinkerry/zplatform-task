@@ -95,6 +95,9 @@
 				<ref bean="createIndustryAccountsFileTrigger3" />
 				<ref bean="createIndustryAccountsFileTrigger4" />
 				<ref bean="createIndustryAccountsFileTrigger5" />
+				<ref bean="createCreditAccountFileTrigger" />
+				<ref bean="createCreditAccountFileTrigger2" />
+				<ref bean="createCreditAccountFileTrigger3" />
 				<!-- reconcile end -->
 			</list>
 		</property>

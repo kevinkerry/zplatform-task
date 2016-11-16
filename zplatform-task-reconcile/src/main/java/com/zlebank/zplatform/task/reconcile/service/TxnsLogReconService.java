@@ -84,4 +84,22 @@ public interface TxnsLogReconService {
 
 	public List<?> getIndustryRefundDetailByDate(String memberId, String dateTime);
 
+	public List<?> getCreditRechargeByDate(String dateTime);
+
+	public List<?> getSumCreditRecharge(String memberId, String dateTime);
+
+	public List<?> getCreditRechargeDetailByDate(String memberId, String dateTime);
+
+	public List<?> getCreditConsumeByDate(String dateTime);
+
+	public List<?> getSumCreditConsume(String memberId, String dateTime);
+
+	public List<?> getCreditConsumeDetailByDate(String memberId, String dateTime);
+
+	public List<?> getCreditRefundByDate(String dateTime);
+
+	public List<?> getSumCreditRefund(String memberId, String dateTime);
+
+	public List<?> getCreditRefundDetailByDate(String memberId, String dateTime);
+
 }

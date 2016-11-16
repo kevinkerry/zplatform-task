@@ -335,4 +335,79 @@ public class TxnsLogReconServiceImpl implements TxnsLogReconService {
 		return dao.query(sql, new Object[] { memberId, dateTime });
 	}
 
+	@Override
+	public List<?> getCreditRechargeByDate(String dateTime) {
+		String sql = "select distinct t.ACCMEMBERID, t.ACCSETTLEDATE from t_txns_log t "
+				+ "where t.ACCSETTLEDATE=? and t.ACCMEMBERID is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='20000004'";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumCreditRecharge(String memberId, String dateTime) {
+		String sql = "select count(*) total,sum (t.amount) totalAmount,sum(t.txnfee) totalFee "
+                + "from t_txns_log t  "
+                + "where  t.ACCMEMBERID = ? and t.ACCSETTLEDATE=? and t.busicode = '20000004'"
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getCreditRechargeDetailByDate(String memberId, String dateTime) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,"
+                + "t.TXNFEE,t.PAYORDCOMTIME from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno "
+                + "where (b.status=9 or b.status is null) and t.ACCMEMBERID=? and t.ACCSETTLEDATE=? and "
+                + " SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode ='20000004' ";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getCreditConsumeByDate(String dateTime) {
+		String sql = "select distinct t.ACCMEMBERID, t.ACCSETTLEDATE from t_txns_log t "
+				+ "where t.ACCSETTLEDATE=? and t.ACCMEMBERID is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='10000006'";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumCreditConsume(String memberId, String dateTime) {
+		String sql = "select count(*) total,sum (t.amount) totalAmount,sum(t.txnfee) totalFee "
+                + "from t_txns_log t  "
+                + "where  t.ACCMEMBERID = ? and t.ACCSETTLEDATE=? and t.busicode = '10000006'"
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getCreditConsumeDetailByDate(String memberId, String dateTime) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,"
+				+ "t.TXNFEE,t.PAYORDCOMTIME from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno "
+				+ "where (b.status=9 or b.status is null) and t.ACCMEMBERID=? and t.ACCSETTLEDATE=? and "
+				+ " SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode ='10000006' ";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getCreditRefundByDate(String dateTime) {
+		String sql = "select distinct t.ACCMEMBERID, t.ACCSETTLEDATE from t_txns_log t "
+				+ "where t.ACCSETTLEDATE=? and t.ACCMEMBERID is not null and SUBSTR (trim(t.retcode),-2) = '00' and t.busicode='40000004'";
+		return dao.query(sql, new Object[] { dateTime });
+	}
+
+	@Override
+	public List<?> getSumCreditRefund(String memberId, String dateTime) {
+		String sql = "select count(*) total,sum (t.amount) totalAmount,sum(t.txnfee) totalFee "
+                + "from t_txns_log t  "
+                + "where  t.ACCMEMBERID = ? and t.ACCSETTLEDATE=? and t.busicode = '40000004'"
+                + " and SUBSTR(trim(t.retcode), -2) = '00'";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
+	@Override
+	public List<?> getCreditRefundDetailByDate(String memberId, String dateTime) {
+		String sql = "select t.ACCORDNO,t.TXNSEQNO,t.ACCORDCOMMITIME,t.ACCSETTLEDATE,t.amount,t.busicode,"
+				+ "t.TXNFEE,t.PAYORDCOMTIME,t.TXNSEQNO_OG from t_txns_log t left join t_bnk_txn b on t.payordno=b.payordno "
+				+ "where (b.status=9 or b.status is null) and t.ACCMEMBERID=? and t.ACCSETTLEDATE=? and "
+				+ " SUBSTR (trim(t.retcode), -2) = '00'  and t.busicode ='40000004' ";
+		return dao.query(sql, new Object[] { memberId, dateTime });
+	}
+
 }

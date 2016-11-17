@@ -98,7 +98,6 @@ public class CreateBondSDFileJob {
 				long amount = 0;
 				long fee = 0;
 				long settAmount = 0;
-				String flag = null;
 				job = detailJsonArray.getJSONObject(i);
 				amount = Long.valueOf(job.get("AMOUNT").toString());
 				fee = StringUtils.isEmpty(job.get("TXNFEE").toString()) ? 0
@@ -106,17 +105,15 @@ public class CreateBondSDFileJob {
 				// 保证金线上充值、线下充值
 				if ("'20000002', '20000003'".contains(job.get("BUSICODE").toString())) {
 					settAmount = amount + fee;
-					flag = "D";
 				} else if (job.get("BUSICODE").toString().equals("50000002")) {
 					// 保证金提取
 					settAmount = amount - fee;
-					flag = "C";
 				}
 				settAmount = amount + fee;
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ACCORDNO").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("ACCORDCOMMITIME"))
-						.append(DELETIMER).append(job.get("BUSICODE").toString()).append(DELETIMER).append(flag)
+						.append(DELETIMER).append(job.get("BUSICODE").toString())
 						.append(DELETIMER).append(amount).append(DELETIMER).append(fee).append(DELETIMER)
 						.append(settAmount);
 			}

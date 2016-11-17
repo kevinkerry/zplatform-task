@@ -120,7 +120,7 @@ public class CreateIndustryAccountsFileJob {
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ACCORDNO").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("ACCORDCOMMITIME"))
-						.append(DELETIMER).append(job.get("BUSICODE").toString()).append(DELETIMER).append("C")
+						.append(DELETIMER).append(job.get("BUSICODE").toString())
 						.append(DELETIMER).append(amount).append(DELETIMER).append(fee).append(DELETIMER)
 						.append(settAmount);
 			}
@@ -194,7 +194,7 @@ public class CreateIndustryAccountsFileJob {
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ACCORDNO").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("ACCORDCOMMITIME"))
-						.append(DELETIMER).append(job.get("BUSICODE").toString()).append(DELETIMER).append("D")
+						.append(DELETIMER).append(job.get("BUSICODE").toString())
 						.append(DELETIMER).append(amount).append(DELETIMER).append(fee).append(DELETIMER)
 						.append(settAmount);
 			}
@@ -268,7 +268,7 @@ public class CreateIndustryAccountsFileJob {
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ACCORDNO").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("ACCORDCOMMITIME"))
-						.append(DELETIMER).append(job.get("BUSICODE").toString()).append(DELETIMER).append("D")
+						.append(DELETIMER).append(job.get("BUSICODE").toString())
 						.append(DELETIMER).append(amount).append(DELETIMER).append(fee).append(DELETIMER)
 						.append(settAmount);
 			}
@@ -342,7 +342,7 @@ public class CreateIndustryAccountsFileJob {
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ACCORDNO").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("ACCORDCOMMITIME"))
-						.append(DELETIMER).append(job.get("BUSICODE").toString()).append(DELETIMER).append("D")
+						.append(DELETIMER).append(job.get("BUSICODE").toString())
 						.append(DELETIMER).append(amount).append(DELETIMER).append(fee).append(DELETIMER)
 						.append(settAmount);
 
@@ -417,7 +417,7 @@ public class CreateIndustryAccountsFileJob {
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ACCORDNO").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("ACCORDCOMMITIME"))
-						.append(DELETIMER).append(job.get("BUSICODE").toString()).append(DELETIMER).append("C")
+						.append(DELETIMER).append(job.get("BUSICODE").toString())
 						.append(DELETIMER).append(amount).append(DELETIMER).append(fee).append(DELETIMER)
 						.append(settAmount).append(DELETIMER).append(job.get("TXNSEQNO_OG"));
 			}

@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class SqlQueryDao {
@@ -19,6 +20,7 @@ public class SqlQueryDao {
 		return sessionFactory.getCurrentSession();
 	}
 
+	@Transactional(readOnly = true)
 	public List<?> query(String sql, Object[] params) {
 		SQLQuery query = (SQLQuery) getSession().createSQLQuery(sql)
 				.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);

@@ -6,6 +6,11 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- 生成商户清算明细对账文件任务 -->
+	<!--bean id="createMemberFileTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="createMemberFileDetail"/>
+		<property name="startDelay" value="1000"/>
+		<property name="repeatCount" value="0" />
+	</bean-->
 	<bean id="createMemberFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="createMemberFileDetail"/>
 		<property name="startDelay" value="0"/>
@@ -42,10 +47,10 @@
 	</bean>
 
 	<!-- 生成批量代付对账文件任务 -->
-	<bean id="createMerchantInsteadSDFileTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+	<bean id="createMerchantInsteadSDFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="createMerchantInsteadSDFileDetail"/>
 		<property name="startDelay" value="0"/>
-		<property name="repeatInterval" value="40000"/>
+		<property name="cronExpression" value="0 1 2 * * ?"/>
 	</bean>
 	<bean id="createMerchantInsteadSDFileDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="createMerchantInsteadSDFileJob"/>

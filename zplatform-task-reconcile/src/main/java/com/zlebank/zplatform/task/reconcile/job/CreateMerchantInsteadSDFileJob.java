@@ -111,7 +111,7 @@ public class CreateMerchantInsteadSDFileJob {
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ACCORDNO").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("ACCORDCOMMITIME"))
-						.append(DELETIMER).append(job.get("BUSICODE").toString()).append(DELETIMER).append("D")
+						.append(DELETIMER).append(job.get("BUSICODE").toString())
 						.append(DELETIMER).append(amount).append(DELETIMER).append(fee).append(DELETIMER)
 						.append(settAmount);
 			}
@@ -185,7 +185,7 @@ public class CreateMerchantInsteadSDFileJob {
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ACCORDNO").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("ACCORDCOMMITIME"))
-						.append(DELETIMER).append(job.get("BUSICODE").toString()).append(DELETIMER).append("D")
+						.append(DELETIMER).append(job.get("BUSICODE").toString())
 						.append(DELETIMER).append(amount).append(DELETIMER).append(fee).append(DELETIMER)
 						.append(settAmount);
 			}
@@ -305,7 +305,7 @@ public class CreateMerchantInsteadSDFileJob {
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ORDERNO").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("ORDER_COMMI_TIME"))
-						.append(DELETIMER).append("70000002").append(DELETIMER).append("D").append(DELETIMER)
+						.append(DELETIMER).append("70000002").append(DELETIMER)
 						.append(amount).append(DELETIMER).append(job.get("RESP_CODE")).append(DELETIMER)
 						.append(job.get("RESP_MSG")).append(DELETIMER).append(job.get("RETURN_DATE"));
 			}
@@ -382,7 +382,7 @@ public class CreateMerchantInsteadSDFileJob {
 				fileBuffer.append("\n");
 				fileBuffer.append(job.get("ORDER_ID").toString()).append(DELETIMER)
 						.append(job.get("TXNSEQNO").toString()).append(DELETIMER).append(job.get("TXN_TIME"))
-						.append(DELETIMER).append("70000001").append(DELETIMER).append("D").append(DELETIMER)
+						.append(DELETIMER).append("70000001").append(DELETIMER)
 						.append(amount).append(DELETIMER).append(job.get("RESP_CODE")).append(DELETIMER)
 						.append(job.get("RESP_MSG")).append(DELETIMER).append(job.get("RETUR_NDATE"));
 			}

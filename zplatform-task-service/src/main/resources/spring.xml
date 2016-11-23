@@ -102,7 +102,14 @@
 			</list>
 		</property>
 	</bean>
-	
+	<bean id="cmbcWithholdingProducer" class="com.zlebank.zplatform.cmbc.producer.spring.WithholdingSpringProducer"
+            init-method="init"  
+            destroy-method="closeProducer"
+            scope="singleton"/>
+    <bean id="cmbcInsteadPayProducer" class="com.zlebank.zplatform.cmbc.producer.spring.InsteadPaySpringProducer"
+            init-method="init"  
+            destroy-method="closeProducer"
+            scope="singleton"/>
 	<!-- import -->
 	<import resource="spring-hibernate.xml"/>
 	<import resource="spring-dubbo.xml"/>

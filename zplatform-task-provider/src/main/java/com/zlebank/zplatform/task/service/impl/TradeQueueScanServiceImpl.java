@@ -15,9 +15,15 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.rocketmq.client.exception.MQBrokerException;
+import com.alibaba.rocketmq.client.exception.MQClientException;
+import com.alibaba.rocketmq.remoting.exception.RemotingException;
+import com.zlebank.zplatform.cmbc.producer.enums.WithholdingTagsEnum;
+import com.zlebank.zplatform.cmbc.producer.interfaces.Producer;
 import com.zlebank.zplatform.task.bean.TradeQueueBean;
 import com.zlebank.zplatform.task.common.utils.DateUtil;
 import com.zlebank.zplatform.task.dao.TxnsLogDAO;
@@ -44,7 +50,9 @@ public class TradeQueueScanServiceImpl implements TradeQueueScanService{
 	private TradeQueueService tradeQueueService;
 	@Autowired
 	private TxnsLogDAO txnsLogDAO;
-	
+	@Autowired
+	@Qualifier("cmbcWithholdingProducer")
+	private Producer cmbcWithholdingProducer;
 	
 	public void scanTradeQueue(){
 		log.info("【开始交易队列扫描任务】");
@@ -57,19 +65,27 @@ public class TradeQueueScanServiceImpl implements TradeQueueScanService{
 				if(tradeQueueBean==null){//此处为空时很可能是队列中已经没有交易了，跳出循环
 					break;
 				}
-				
 				//判断交易是否已经完成，账务也处理完成
 				PojoTxnsLog txnsLog = txnsLogDAO.getTxnsLogByTxnseqno(tradeQueueBean.getTxnseqno());
 				if(txnsLog==null){
 					tradeQueueService.addTradeQueue(tradeQueueBean);
+					break;
 				}
 				log.info("【交易队列中"+tradeQueueBean.getTxnseqno()+"交易数据】"+JSON.toJSONString(txnsLog));
 				TradeStatFlagEnum tradeStatFlagEnum = TradeStatFlagEnum.fromValue(txnsLog.getTradestatflag());
 				if(tradeStatFlagEnum==TradeStatFlagEnum.PAYING||tradeStatFlagEnum==TradeStatFlagEnum.OVERTIME){//交易支付中或者交易超时
 					ChannelEnmu channelEnmu = ChannelEnmu.fromValue(tradeQueueBean.getPayInsti());
 					if (ChannelEnmu.CMBCWITHHOLDING==channelEnmu) {
+						log.info("【交易队列中"+tradeQueueBean.getTxnseqno()+"交易为民生跨行代扣渠道】");
+						try {
+							cmbcWithholdingProducer.sendJsonMessage(JSON.toJSONString(tradeQueueBean), WithholdingTagsEnum.WITHHOLDING_QUERY_ACCOUNTING);
+						} catch (MQClientException | RemotingException
+								| InterruptedException | MQBrokerException e) {
+							e.printStackTrace();
+							tradeQueueService.addTradeQueue(tradeQueueBean);
+						}
+					}else if(ChannelEnmu.CMBCINSTEADPAY_REALTIME==channelEnmu){
 						
-						log.info("【交易队列中"+tradeQueueBean.getTxnseqno()+"交易为民生代扣渠道】");
 					}
 					
 				}else{

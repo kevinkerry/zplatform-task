@@ -300,5 +300,6 @@
     	<module>../zplatform-task-reconcile</module>
 		<module>../zplatform-task-provider</module>
 		<module>../zplatform-task-service</module>
+		<module>../zplatform-task-simple</module>
   </modules>
 </project>

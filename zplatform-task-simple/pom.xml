@@ -1,32 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.zlebank.zplatform</groupId>
-  <artifactId>zplatform-task-simple</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<groupId>com.zlebank.zplatform</groupId>
+	<artifactId>zplatform-task-simple</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-  <name>zplatform-task-simple</name>
-  <url>http://maven.apache.org</url>
+	<name>zplatform-task-simple</name>
+	<url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-  <dependencies>
-    <dependency>
-    	<groupId>com.zlebank.zplatform</groupId>
-    	<artifactId>zplatform-task-provider</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-    	<groupId>com.zlebank.zplatform</groupId>
-    	<artifactId>zplatform-task-reconcile</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
-<build>
+	<dependencies>
+		<dependency>
+			<groupId>com.zlebank.zplatform</groupId>
+			<artifactId>zplatform-task-provider</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zlebank.zplatform</groupId>
+			<artifactId>zplatform-task-reconcile</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.26</version>
+		</dependency>
+	</dependencies>
+	<build>
 		<finalName>${artifactId}</finalName>
 		<resources>
 			<resource>
